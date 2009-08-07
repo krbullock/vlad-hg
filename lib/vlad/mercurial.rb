@@ -1,38 +1,45 @@
-class Vlad::Mercurial
+require 'vlad'
 
-  set :source, Vlad::Mercurial.new
-  set :hg_cmd, "hg"
+module Vlad
+  class Mercurial
 
-  ##
-  # Returns the command that will check out +revision+ from the
-  # repository into directory +destination+.  +revision+ can be any
-  # changeset ID or equivalent (e.g. branch, tag, etc...)
+    VERSION = '1.0.0'.freeze
 
-  def checkout(revision, destination)
-    revision = 'tip' if revision =~ /^head$/i
+    set :source, Vlad::Mercurial.new
+    set :hg_cmd, "hg"
 
-    [ "if [ ! -d #{destination}/.hg ]; then #{hg_cmd} init #{destination}; fi",
-      "#{hg_cmd} pull -R #{destination} #{repository}",
-      "#{hg_cmd} update #{revision}"
-    ].join(' && ')
-  end
+    ##
+    # Returns the command that will check out +revision+ from the
+    # repository into directory +destination+.  +revision+ can be any
+    # changeset ID or equivalent (e.g. branch, tag, etc...)
 
-  ##
-  # Returns the command that will export +revision+ from the repository into
-  # the directory +destination+.
-  # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
+    def checkout(revision, destination)
+      revision = 'tip' if revision =~ /^head$/i
 
-  def export(revision, destination)
-    revision = 'tip' if revision =~ /^head$/i
+      [ "if [ ! -d #{destination}/.hg ]; then #{hg_cmd} init #{destination}; fi",
+        "#{hg_cmd} pull -R #{destination} #{repository}",
+        "#{hg_cmd} update #{revision}"
+      ].join(' && ')
+    end
 
-    "#{hg_cmd} archive -R #{scm_path} -r #{revision} #{destination}"
-  end
+    ##
+    # Returns the command that will export +revision+ from the repository into
+    # the directory +destination+.
+    # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
 
-  ##
-  # Returns a command that maps human-friendly revision identifier +revision+
-  # into a mercurial changeset ID.
+    def export(revision, destination)
+      revision = 'tip' if revision =~ /^head$/i
 
-  def revision(revision)
-    "`#{hg_cmd} identify -R #{repository} | cut -f1 -d\\ `"
+      "#{hg_cmd} archive -R #{scm_path} -r #{revision} #{destination}"
+    end
+
+    ##
+    # Returns a command that maps human-friendly revision identifier +revision+
+    # into a mercurial changeset ID.
+
+    def revision(revision)
+      "`#{hg_cmd} identify -R #{repository} | cut -f1 -d\\ `"
+    end
+
   end
 end
