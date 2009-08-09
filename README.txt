@@ -1,32 +1,38 @@
 = vladhg
 
-* FIX (url)
+* http://vladhg.rubyforge.org/
 
 == DESCRIPTION:
 
-FIX (describe your package)
+Mercurial support for Vlad
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Plug it in, it works.
 
-== SYNOPSIS:
+== SYNOPSIS
 
-  FIX (code sample of usage)
+    # lib/tasks/vlad.rake
+    begin
+      require 'vlad'
+      Vlad.load(:scm => :mercurial)
+    rescue LoadError
+    end
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* Vlad
+* Mercurial
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install vladhg
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 Kevin R. Bullock <kbullock@ringworld.org>
+Copyright (c) 2009 Ryan Davis and the rest of the Ruby Hit Squad
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
