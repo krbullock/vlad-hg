@@ -2,6 +2,5 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/vladhg
-lib/vladhg.rb
-test/test_vladhg.rb
+lib/vlad/mercurial.rb
+test/test_vlad_mercurial.rb
