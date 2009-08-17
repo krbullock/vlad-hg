@@ -2,6 +2,7 @@
 
 * http://vladhg.rubyforge.org/
 * http://bitbucket.org/krbullock/vlad-hg/
+* http://rubyforge.org/projects/vladhg/
 
 == DESCRIPTION:
 
