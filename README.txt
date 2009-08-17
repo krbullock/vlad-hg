@@ -1,7 +1,7 @@
 = vladhg
 
 * http://vladhg.rubyforge.org/
-* http://bitbucket.org/krbullock/vladhg/
+* http://bitbucket.org/krbullock/vlad-hg/
 
 == DESCRIPTION:
 
@@ -27,7 +27,7 @@ Mercurial support for Vlad
 
 == INSTALL:
 
-* sudo gem install vladhg
+* sudo gem install vlad-hg
 
 == LICENSE:
 
