@@ -1,4 +1,4 @@
-= vladhg
+= vlad-hg
 
 * http://vladhg.rubyforge.org/
 * http://bitbucket.org/krbullock/vlad-hg/
@@ -6,7 +6,8 @@
 
 == DESCRIPTION:
 
-Mercurial support for Vlad
+Mercurial support for Vlad. Using it is as simple as passing
++:scm => :mercurial+ to Vlad when loading it up (see Synopsis below).
 
 == FEATURES/PROBLEMS:
 
