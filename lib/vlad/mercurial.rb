@@ -3,7 +3,7 @@ require 'vlad'
 module Vlad
   class Mercurial
 
-    VERSION = '1.0.0'.freeze
+    VERSION = '2.0.0'.freeze
 
     set :source, Vlad::Mercurial.new
     set :hg_cmd, "hg"
