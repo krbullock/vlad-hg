@@ -7,7 +7,7 @@
 == DESCRIPTION:
 
 Mercurial support for Vlad. Using it is as simple as passing
-+:scm => :mercurial+ to Vlad when loading it up (see Synopsis below).
+<tt>:scm => :mercurial</tt> to Vlad when loading it up (see Synopsis below).
 
 == FEATURES/PROBLEMS:
 
@@ -24,8 +24,8 @@ Mercurial support for Vlad. Using it is as simple as passing
 
 == REQUIREMENTS:
 
-* Vlad
-* Mercurial
+* Vlad[http://rubyhitsquad.com/Vlad_the_Deployer.html]
+* Mercurial[http://mercurial.selenic.com/]
 
 == INSTALL:
 
