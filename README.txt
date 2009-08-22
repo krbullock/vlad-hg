@@ -1,7 +1,7 @@
 = vlad-hg
 
-* http://rubyforge.org/projects/hitsquad/
 * http://hitsquad.rubyforge.org/vlad-hg
+* http://rubyforge.org/projects/hitsquad/
 * http://bitbucket.org/krbullock/vlad-hg/
 
 == DESCRIPTION:
