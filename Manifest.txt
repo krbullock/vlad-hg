@@ -4,3 +4,4 @@ README.txt
 Rakefile
 lib/vlad/mercurial.rb
 test/test_vlad_mercurial.rb
+test/vlad_test_case.rb
