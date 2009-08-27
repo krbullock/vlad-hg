@@ -38,7 +38,7 @@ module Vlad
     # into a mercurial changeset ID.
 
     def revision(revision)
-      "`#{hg_cmd} identify -R #{repository} | cut -f1 -d\\ `"
+      "`#{hg_cmd} identify -R #{repository} -r #{revision} | cut -f1 -d\\ `"
     end
 
   end
