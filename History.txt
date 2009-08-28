@@ -1,3 +1,9 @@
+=== 2.0.2 / 2009-08-28
+
+* 1 minor enhancement
+
+  * Fix a bug causing non-tip revisions to pull the wrong changeset hash.
+
 === 2.0.1 / 2009-08-19
 
 * 1 minor enhancement
