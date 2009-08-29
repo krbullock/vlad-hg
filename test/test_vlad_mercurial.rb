@@ -26,7 +26,7 @@ class TestVladMercurial < MiniTest::Unit::TestCase
 
   def test_revision
     cmd = @scm.revision('tip')
-    expected = "`hg identify -R http://repo/project | cut -f1 -d\\ `"
+    expected = "`hg identify -R http://repo/project -r tip | cut -f1 -d\\ `"
     assert_equal expected, cmd
   end
 end
