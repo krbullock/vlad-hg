@@ -5,6 +5,9 @@ module Vlad
 
     set :source, Vlad::MercurialQueue.new
     set :hg_cmd, "hg"
+    set :queue_repo do
+      "#{repository}/.hg/patches"
+    end
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -18,7 +21,7 @@ module Vlad
       commands << "if [ ! -d .hg ]; then #{hg_cmd} init; fi"
       commands << "if [ ! -d .hg/patches/.hg ]; then #{hg_cmd} qinit -c; fi"
       commands << "#{hg_cmd} pull #{repository}"
-      commands << "#{hg_cmd} pull -R .hg/patches #{repository}/.hg/patches"
+      commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
       commands << "#{hg_cmd} update #{revision}"
       commands << "#{hg_cmd} update -R .hg/patches"
       commands << "#{hg_cmd} qpush -a"

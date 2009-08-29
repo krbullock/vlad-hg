@@ -3,6 +3,7 @@ require 'vlad'
 require 'vlad/mercurial_queue'
 
 class TestVladMercurialQueue < MiniTest::Unit::TestCase
+
   def setup
     @scm = Vlad::MercurialQueue.new
     set :repository, "http://repo/project"
@@ -13,10 +14,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     cmd = @scm.checkout 'head', '/path/to/scm'
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
-               "&& if [ ! -d .hg/patches/.hg ]; then " \
-                  "hg qinit -c; fi " \
+               "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
                "&& hg pull http://repo/project " \
-               "&& hg pull -R .hg/patches http://repo/project/.hg/patches "\
+               "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches " \
                "&& hg qpush -a"
@@ -34,5 +34,22 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     expected = "`hg identify -r tip | cut -f1 -d\\ `"
     assert_equal expected, cmd
   end
-end
 
+  def test_alternate_patch_queue_path
+    set :queue_repo, 'http://repo/project-patched'
+
+    # only need to test #checkout
+    cmd = @scm.checkout 'head', '/path/to/scm'
+
+    expected = "if [ ! -d .hg ]; then hg init; fi " \
+               "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+               "&& hg pull http://repo/project " \
+               "&& hg pull -R .hg/patches http://repo/project-patched " \
+               "&& hg update tip " \
+               "&& hg update -R .hg/patches " \
+               "&& hg qpush -a"
+
+    assert_equal expected, cmd
+  end
+
+end
