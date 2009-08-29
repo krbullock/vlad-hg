@@ -16,8 +16,9 @@ module Vlad
     def checkout(revision, destination)
       revision = 'tip' if revision =~ /^head$/i
 
-      [ "if [ ! -d #{destination}/.hg ]; then #{hg_cmd} init #{destination}; fi",
-        "#{hg_cmd} pull -R #{destination} #{repository}",
+      # These all get executed after a "cd #{scm_path}"
+      [ "if [ ! -d .hg ]; then #{hg_cmd} init; fi",
+        "#{hg_cmd} pull #{repository}",
         "#{hg_cmd} update #{revision}"
       ].join(' && ')
     end
@@ -30,7 +31,7 @@ module Vlad
     def export(revision, destination)
       revision = 'tip' if revision =~ /^head$/i
 
-      "#{hg_cmd} archive -R #{scm_path} -r #{revision} #{destination}"
+      "#{hg_cmd} archive -r #{revision} #{destination}"
     end
 
     ##
@@ -38,7 +39,7 @@ module Vlad
     # into a mercurial changeset ID.
 
     def revision(revision)
-      "`#{hg_cmd} identify -R #{repository} -r #{revision} | cut -f1 -d\\ `"
+      "`#{hg_cmd} identify -r #{revision} | cut -f1 -d\\ `"
     end
 
   end
