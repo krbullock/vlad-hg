@@ -19,6 +19,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches " \
+               "&& hg qpop -a " \
                "&& hg qpush -a"
 
     assert_equal expected, cmd
@@ -47,6 +48,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& hg pull -R .hg/patches http://repo/project-patched " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches " \
+               "&& hg qpop -a " \
                "&& hg qpush -a"
 
     assert_equal expected, cmd

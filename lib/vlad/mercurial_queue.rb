@@ -24,6 +24,7 @@ module Vlad
       commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
       commands << "#{hg_cmd} update #{revision}"
       commands << "#{hg_cmd} update -R .hg/patches"
+      commands << "#{hg_cmd} qpop -a"
       commands << "#{hg_cmd} qpush -a"
       commands.join(' && ')
     end
