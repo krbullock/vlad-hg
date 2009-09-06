@@ -17,9 +17,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
+               "&& hg qpop -a " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches " \
-               "&& hg qpop -a " \
                "&& hg qpush -a"
 
     assert_equal expected, cmd
@@ -46,9 +46,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project-patched " \
+               "&& hg qpop -a " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches " \
-               "&& hg qpop -a " \
                "&& hg qpush -a"
 
     assert_equal expected, cmd
