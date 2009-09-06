@@ -5,4 +5,5 @@ Rakefile
 lib/vlad/mercurial.rb
 lib/vlad/mercurial_queue.rb
 test/test_vlad_mercurial.rb
+test/test_vlad_mercurial_queue.rb
 test/vlad_test_case.rb
