@@ -14,7 +14,7 @@ Mercurial support for Vlad. Using it is as simple as passing
 * Plug it in, it works.
 
 * Supports deploying a patch queue on top of the deployed site (uses Mercurial
-  Queues extension).
+  Queues extension). See documentation below.
 
 == SYNOPSIS
 
