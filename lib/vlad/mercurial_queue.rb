@@ -38,7 +38,7 @@ module Vlad
     def export(revision, destination)
       revision = 'tip' if revision =~ /^head$/i
 
-      "#{hg_cmd} archive -r #{revision} #{destination}"
+      "#{hg_cmd} archive -r qtip #{destination}"
     end
 
     ##
