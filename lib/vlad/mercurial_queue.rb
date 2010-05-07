@@ -8,6 +8,7 @@ module Vlad
     set :queue_repo do
       "#{repository}/.hg/patches"
     end
+    set :queue_revision, "tip"
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -24,7 +25,7 @@ module Vlad
       commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
       commands << "#{hg_cmd} qpop -a"
       commands << "#{hg_cmd} update #{revision}"
-      commands << "#{hg_cmd} update -R .hg/patches"
+      commands << "#{hg_cmd} update -R .hg/patches #{queue_revision}"
       commands << "#{hg_cmd} qpush -a"
       commands.join(' && ')
     end

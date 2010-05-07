@@ -82,6 +82,11 @@ and you would push your patch queue like so:
 
     $ hg push -R .hg/patches http://example.com/hg/my-staging-site
 
+To use a revision _of the patch queue_ other than +tip+, specify the
++queue_revision+ variable:
+
+    set :queue_revision, "deadbeefd00d"
+
 == LICENSE:
 
 (The MIT License)
