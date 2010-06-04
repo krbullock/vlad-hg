@@ -91,7 +91,7 @@ To use a revision _of the patch queue_ other than +tip+, specify the
 
 (The MIT License)
 
-Copyright (c) 2009 Kevin Bullock and the rest of the Ruby Hit Squad
+Copyright (c) 2010 Kevin Bullock and the rest of the Ruby Hit Squad
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
