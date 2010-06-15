@@ -17,9 +17,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+               "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg qpop -a " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches tip " \
                "&& hg qpush -a"
@@ -46,9 +46,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+               "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project-patched " \
-               "&& hg qpop -a " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches tip " \
                "&& hg qpush -a"
@@ -64,9 +64,9 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+               "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg qpop -a " \
                "&& hg update tip " \
                "&& hg update -R .hg/patches deadbeefd00d " \
                "&& hg qpush -a"
