@@ -30,8 +30,12 @@ module Vlad
 
     def export(revision, destination)
       revision = 'tip' if revision =~ /^head$/i
-
-      "#{hg_cmd} archive -r #{revision} #{destination}"
+      case deploy_via.to_s
+      when  /checkout/
+        "#{hg_cmd} clone #{scm_path} -r #{revision} #{destination}"
+      else
+        "#{hg_cmd} archive -r #{revision} #{destination}"
+      end
     end
 
     ##
