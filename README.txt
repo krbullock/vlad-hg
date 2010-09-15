@@ -39,6 +39,14 @@ Mercurial support for Vlad. Using it is as simple as passing
 
 * sudo gem install vlad-hg
 
+== VARIABLES:
+
+hg_cmd::          The mercurial command to use. Defaults to 'hg'.
+queue_repo::      The location of the MQ repository to use for
+                  +:mercurial_queue+. Defaults to "#{repository}/.hg/patches".
+queue_revision::  The revision of the _patch queue_ repository to use. See
+                  below.
+
 == PATCH QUEUES:
 
 +vlad-hg+ supports deploying from a patch queue repository on top of the main
