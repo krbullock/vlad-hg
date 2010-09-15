@@ -16,7 +16,7 @@ module Vlad
     # changeset ID or equivalent (e.g. branch, tag, etc...)
 
     def checkout(revision, destination)
-      revision = 'tip' if revision =~ /^head$/i
+      revision = 'default' if revision =~ /^head$/i
 
       commands = []
       commands << "if [ ! -d .hg ]; then #{hg_cmd} init; fi"
@@ -36,7 +36,7 @@ module Vlad
     # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
 
     def export(revision, destination)
-      revision = 'tip' if revision =~ /^head$/i
+      revision = 'default' if revision =~ /^head$/i
 
       "#{hg_cmd} archive -r qtip #{destination}"
     end

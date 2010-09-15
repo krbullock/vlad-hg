@@ -20,7 +20,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg update tip " \
+               "&& hg update default " \
                "&& hg update -R .hg/patches tip " \
                "&& hg qpush -a"
 
@@ -33,8 +33,8 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
   end
 
   def test_revision
-    cmd = @scm.revision('tip')
-    expected = "`hg identify -r tip | cut -f1 -d\\ `"
+    cmd = @scm.revision('default')
+    expected = "`hg identify -r default | cut -f1 -d\\ `"
     assert_equal expected, cmd
   end
 
@@ -49,7 +49,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project-patched " \
-               "&& hg update tip " \
+               "&& hg update default " \
                "&& hg update -R .hg/patches tip " \
                "&& hg qpush -a"
 
@@ -67,7 +67,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
                "&& hg qpop -a " \
                "&& hg pull http://repo/project " \
                "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg update tip " \
+               "&& hg update default " \
                "&& hg update -R .hg/patches deadbeefd00d " \
                "&& hg qpush -a"
 

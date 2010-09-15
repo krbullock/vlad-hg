@@ -14,14 +14,14 @@ class TestVladMercurial < MiniTest::Unit::TestCase
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& hg pull http://repo/project " \
-               "&& hg update tip"
+               "&& hg update default"
 
     assert_equal expected, cmd
   end
 
   def test_export
     cmd = @scm.export 'head', '/path/to/release'
-    assert_equal 'hg archive -r tip /path/to/release', cmd
+    assert_equal 'hg archive -r default /path/to/release', cmd
   end
 
   def test_revision
