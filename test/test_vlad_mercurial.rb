@@ -11,7 +11,7 @@ class TestVladMercurial < Rake::TestCase
   end
 
   def test_checkout
-    cmd = @scm.checkout 'head', '/path/to/scm'
+    cmd = @scm.checkout 'default', '/path/to/scm'
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& hg pull http://repo/project " \
@@ -21,7 +21,7 @@ class TestVladMercurial < Rake::TestCase
   end
 
   def test_export
-    cmd = @scm.export 'head', '/path/to/release'
+    cmd = @scm.export 'default', '/path/to/release'
     assert_equal :export, deploy_via.to_sym
     assert_equal 'hg archive -r default /path/to/release', cmd
   end
@@ -35,11 +35,11 @@ class TestVladMercurial < Rake::TestCase
 
   def test_deploy_via
     set :deploy_via, :clone
-    cmd = @scm.export 'head', '/path/to/release'
+    cmd = @scm.export 'default', '/path/to/release'
     assert_equal 'hg clone /path/to/scm -r default /path/to/release', cmd
 
     set :deploy_via, :checkout
-    cmd = @scm.export 'head', '/path/to/release'
+    cmd = @scm.export 'default', '/path/to/release'
     assert_equal 'hg clone /path/to/scm -r default /path/to/release', cmd
 end
 

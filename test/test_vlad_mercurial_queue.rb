@@ -13,7 +13,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
   end
 
   def test_checkout
-    cmd = @scm.checkout 'head', '/path/to/scm'
+    cmd = @scm.checkout 'default', '/path/to/scm'
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
@@ -28,7 +28,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
   end
 
   def test_export
-    cmd = @scm.export 'head', '/path/to/release'
+    cmd = @scm.export 'default', '/path/to/release'
     assert_equal 'hg archive -r qtip /path/to/release', cmd
   end
 
@@ -42,7 +42,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     set :queue_repo, 'http://repo/project-patched'
 
     # only need to test #checkout
-    cmd = @scm.checkout 'head', '/path/to/scm'
+    cmd = @scm.checkout 'default', '/path/to/scm'
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
@@ -60,7 +60,7 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     set :queue_revision, "deadbeefd00d"
 
     # only need to test #checkout
-    cmd = @scm.checkout 'head', '/path/to/scm'
+    cmd = @scm.checkout 'default', '/path/to/scm'
 
     expected = "if [ ! -d .hg ]; then hg init; fi " \
                "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
