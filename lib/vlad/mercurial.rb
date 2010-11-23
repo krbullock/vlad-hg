@@ -31,7 +31,12 @@ module Vlad
     def export(revision, destination)
       revision = 'default' if revision =~ /^head$/i
 
-      "#{hg_cmd} archive -r #{revision} #{destination}"
+      case deploy_via.to_sym
+      when :checkout, :clone
+        "#{hg_cmd} clone #{scm_path} -r #{revision} #{destination}"
+      else # :archive, :export (or whatever)
+        "#{hg_cmd} archive -r #{revision} #{destination}"
+      end
     end
 
     ##

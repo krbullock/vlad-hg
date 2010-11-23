@@ -4,6 +4,7 @@ require 'vlad/mercurial'
 
 class TestVladMercurial < MiniTest::Unit::TestCase
   def setup
+    Rake::RemoteTask.set_defaults
     @scm = Vlad::Mercurial.new
     set :repository, "http://repo/project"
     set :deploy_to, "/path/to"
@@ -21,6 +22,7 @@ class TestVladMercurial < MiniTest::Unit::TestCase
 
   def test_export
     cmd = @scm.export 'head', '/path/to/release'
+    assert_equal :export, deploy_via.to_sym
     assert_equal 'hg archive -r default /path/to/release', cmd
   end
 
@@ -30,5 +32,15 @@ class TestVladMercurial < MiniTest::Unit::TestCase
     expected = "`hg identify -r 000000000000 | cut -f1 -d\\ `"
     assert_equal expected, cmd
   end
+
+  def test_deploy_via
+    set :deploy_via, :clone
+    cmd = @scm.export 'head', '/path/to/release'
+    assert_equal 'hg clone /path/to/scm -r default /path/to/release', cmd
+
+    set :deploy_via, :checkout
+    cmd = @scm.export 'head', '/path/to/release'
+    assert_equal 'hg clone /path/to/scm -r default /path/to/release', cmd
 end
 
+end
