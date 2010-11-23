@@ -1,3 +1,14 @@
+=== 2.1.3 / 2010-11-22
+
+* 2 bugfixes
+
+  * Honor the setting of +deploy_via+. Thanks to McClain Looney.
+
+  * Use 'default' as the actual default value of +revision+. This will break
+    your configuration if you were manually doing something silly like <tt>set
+    :revision, 'head'</tt> in your deploy.rb. But you wouldn't do that, would
+    you?
+
 === 2.1.2 / 2010-09-15
 
 * 1 bug fix
