@@ -1,4 +1,4 @@
-require 'test/vlad_test_case'
+require 'rake/test_case' # from rake_remote_task
 require 'vlad'
 require 'vlad/mercurial_queue'
 

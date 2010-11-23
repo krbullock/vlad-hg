@@ -1,8 +1,8 @@
-require 'test/vlad_test_case'
+require 'rake/test_case' # from rake_remote_task
 require 'vlad'
 require 'vlad/mercurial'
 
-class TestVladMercurial < MiniTest::Unit::TestCase
+class TestVladMercurial < Rake::TestCase
   def setup
     Rake::RemoteTask.set_defaults
     @scm = Vlad::Mercurial.new
