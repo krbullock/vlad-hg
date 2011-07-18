@@ -5,6 +5,7 @@ require 'vlad/mercurial_queue'
 class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
   def setup
+    Rake::RemoteTask.set_defaults
     @scm = Vlad::MercurialQueue.new
     set :repository,      "http://repo/project"
     set :deploy_to,       "/path/to"
@@ -30,6 +31,19 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
   def test_export
     cmd = @scm.export 'default', '/path/to/release'
     assert_equal 'hg archive -r qtip /path/to/release', cmd
+  end
+
+  def test_export_via
+    set :deploy_via, :checkout
+    cmd = @scm.export 'default', '/path/to/release'
+    assert_equal 'hg clone /path/to/scm -r qtip /path/to/release', cmd
+  end
+
+  def test_export_subrepos
+    set :hg_subrepos, true
+    cmd = @scm.export 'default', '/path/to/release'
+    assert_equal 'hg archive -S -r qtip /path/to/release', cmd
+    set :hg_subrepos, false
   end
 
   def test_revision

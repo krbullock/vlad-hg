@@ -35,7 +35,12 @@ module Vlad
     # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
 
     def export(revision, destination)
-      "#{hg_cmd} archive -r qtip #{destination}"
+      case deploy_via.to_sym
+      when :checkout, :clone
+        "#{hg_cmd} clone #{scm_path} -r qtip #{destination}"
+      else # :archive, :export (or whatever)
+        "#{hg_cmd} archive#{' -S' if hg_subrepos} -r qtip #{destination}"
+      end
     end
 
     ##
