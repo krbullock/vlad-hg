@@ -9,7 +9,7 @@ Hoe.spec 'vlad-hg' do
   self.rubyforge_name = 'hitsquad'
   developer 'Kevin R. Bullock', 'kbullock@ringworld.org'
   extra_deps << ['vlad', '~> 2.0']
-  self.hg_release_tag_prefix = 'rel-'
+  self.hg_release_tag_prefix = 'v'
 end
 
 # vim: syntax=Ruby
