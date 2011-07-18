@@ -42,6 +42,8 @@ Mercurial support for Vlad. Using it is as simple as passing
 == VARIABLES:
 
 hg_cmd::          The mercurial command to use. Defaults to 'hg'.
+hg_subrepos::     Whether to look for subrepos when exporting. Defaults to
+                  false.
 queue_repo::      The location of the MQ repository to use for
                   +:mercurial_queue+. Defaults to "#{repository}/.hg/patches".
 queue_revision::  The revision of the _patch queue_ repository to use. See

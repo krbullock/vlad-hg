@@ -7,6 +7,7 @@ module Vlad
 
     set :source, Vlad::Mercurial.new
     set :hg_cmd, "hg"
+    set :hg_subrepos, false
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -31,7 +32,7 @@ module Vlad
     def export(revision, destination)
       revision = 'default' if revision =~ /^head$/i
 
-      "#{hg_cmd} archive -r #{revision} #{destination}"
+      "#{hg_cmd} archive#{' -S' if hg_subrepos} -r #{revision} #{destination}"
     end
 
     ##

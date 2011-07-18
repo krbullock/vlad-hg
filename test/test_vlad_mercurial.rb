@@ -25,6 +25,13 @@ class TestVladMercurial < MiniTest::Unit::TestCase
     assert_equal 'hg archive -r default /path/to/release', cmd
   end
 
+  def test_export_subrepos
+    set :hg_subrepos, true
+    cmd = @scm.export 'head', '/path/to/release'
+    assert_equal 'hg archive -S -r default /path/to/release', cmd
+    set :hg_subrepos, false
+  end
+
   def test_revision
     # 0x0000_0000_0000 is the changeset ID for the root revision of all hg repos
     cmd = @scm.revision('000000000000')
