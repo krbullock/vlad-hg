@@ -1,3 +1,9 @@
+=== 2.2.2 / 2011-07-18
+
+* 1 bug fix
+
+  * Respect +deploy_via+ and +hg_subrepos+ when using MQ
+
 === 2.2.1 / 2011-07-18
 
 * 1 bug fix
