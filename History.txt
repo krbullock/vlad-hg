@@ -1,3 +1,9 @@
+=== 2.2.1 / 2011-07-18
+
+* 1 bug fix
+
+  * Fix regressions caused by failure to merge 2.1.3 before releasing 2.2.0.
+
 === 2.2.0 / 2011-07-18
 
 * 1 minor enhancement
