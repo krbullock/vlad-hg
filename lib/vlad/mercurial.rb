@@ -17,7 +17,7 @@ module Vlad
       revision = 'default' if revision =~ /^head$/i
 
       # These all get executed after a "cd #{scm_path}"
-      [ "if [ ! -d .hg ]; then #{hg_cmd} init; fi",
+      [ "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi",
         "#{hg_cmd} pull #{repository}",
         "#{hg_cmd} update #{revision}"
       ].join(' && ')

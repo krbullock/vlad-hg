@@ -12,9 +12,10 @@ class TestVladMercurial < MiniTest::Unit::TestCase
   def test_checkout
     cmd = @scm.checkout 'head', '/path/to/scm'
 
-    expected = "if [ ! -d .hg ]; then hg init; fi " \
-               "&& hg pull http://repo/project " \
-               "&& hg update default"
+    expected =
+      "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
+      "&& hg pull http://repo/project " \
+      "&& hg update default"
 
     assert_equal expected, cmd
   end
