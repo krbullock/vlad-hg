@@ -5,9 +5,10 @@ module Vlad
 
     VERSION = '2.2.0'.freeze
 
-    set :source, Vlad::Mercurial.new
-    set :hg_cmd, "hg"
-    set :hg_subrepos, false
+    set :source,        Vlad::Mercurial.new
+    set :hg_cmd,        'hg'
+    set :revision,      'default'
+    set :hg_subrepos,   false
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -15,8 +16,6 @@ module Vlad
     # changeset ID or equivalent (e.g. branch, tag, etc...)
 
     def checkout(revision, destination)
-      revision = 'default' if revision =~ /^head$/i
-
       # These all get executed after a "cd #{scm_path}"
       [ "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi",
         "#{hg_cmd} pull #{repository}",
@@ -30,9 +29,12 @@ module Vlad
     # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
 
     def export(revision, destination)
-      revision = 'default' if revision =~ /^head$/i
-
-      "#{hg_cmd} archive#{' -S' if hg_subrepos} -r #{revision} #{destination}"
+      case deploy_via.to_sym
+      when :checkout, :clone
+        "#{hg_cmd} clone #{scm_path} -r #{revision} #{destination}"
+      else # :archive, :export (or whatever)
+        "#{hg_cmd} archive#{' -S' if hg_subrepos} -r #{revision} #{destination}"
+      end
     end
 
     ##

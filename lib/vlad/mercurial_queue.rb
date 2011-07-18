@@ -4,11 +4,12 @@ module Vlad
   class MercurialQueue
 
     set :source, Vlad::MercurialQueue.new
-    set :hg_cmd, "hg"
+    set :hg_cmd, 'hg'
+    set :revision, 'default'
     set :queue_repo do
       "#{repository}/.hg/patches"
     end
-    set :queue_revision, "tip"
+    set :queue_revision, 'default'
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -16,8 +17,6 @@ module Vlad
     # changeset ID or equivalent (e.g. branch, tag, etc...)
 
     def checkout(revision, destination)
-      revision = 'default' if revision =~ /^head$/i
-
       commands = []
       commands << "if [ ! -d .hg ]; then #{hg_cmd} init; fi"
       commands << "if [ ! -d .hg/patches/.hg ]; then #{hg_cmd} qinit -c; fi"
@@ -36,8 +35,6 @@ module Vlad
     # Expects to be run from +scm_path+ after Vlad::Mercurial#checkout
 
     def export(revision, destination)
-      revision = 'default' if revision =~ /^head$/i
-
       "#{hg_cmd} archive -r qtip #{destination}"
     end
 
