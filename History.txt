@@ -1,3 +1,16 @@
+=== 2.2.0 / 2011-07-18
+
+* 1 minor enhancement
+
+  * Added +hg_subrepos+ variable. When set to +true+, the export step recurses
+    into subdirectories (adds the -S flag to <code>hg archive</code>).
+
+* 1 bug fix
+
+  * Now does a proper <code>hg clone</code>, so that the default path on the
+    deployment clone is set to the central repository. This is necessary if your
+    repo has subrepos with relative paths.
+
 === 2.1.2 / 2010-09-15
 
 * 1 bug fix
