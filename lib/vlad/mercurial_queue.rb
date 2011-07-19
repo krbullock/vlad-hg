@@ -18,8 +18,7 @@ module Vlad
     def checkout(revision, destination)
       commands = []
       commands <<
-        "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi"
-      commands << "if [ ! -d .hg/patches/.hg ]; then #{hg_cmd} qinit -c; fi"
+        "if [ ! -d .hg ]; then #{hg_cmd} qclone -r null #{repository} .; fi"
       commands << "#{hg_cmd} qpop -a"
       commands << "#{hg_cmd} pull #{repository}"
       commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
