@@ -16,14 +16,15 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
   def test_checkout
     cmd = @scm.checkout 'default', '/path/to/scm'
 
-    expected = "if [ ! -d .hg ]; then hg init; fi " \
-               "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
-               "&& hg qpop -a " \
-               "&& hg pull http://repo/project " \
-               "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg update default " \
-               "&& hg update -R .hg/patches tip " \
-               "&& hg qpush -a"
+    expected =
+      "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& hg qpop -a " \
+      "&& hg pull http://repo/project " \
+      "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
+      "&& hg update default " \
+      "&& hg update -R .hg/patches tip " \
+      "&& hg qpush -a"
 
     assert_equal expected, cmd
   end
@@ -58,14 +59,15 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     # only need to test #checkout
     cmd = @scm.checkout 'default', '/path/to/scm'
 
-    expected = "if [ ! -d .hg ]; then hg init; fi " \
-               "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
-               "&& hg qpop -a " \
-               "&& hg pull http://repo/project " \
-               "&& hg pull -R .hg/patches http://repo/project-patched " \
-               "&& hg update default " \
-               "&& hg update -R .hg/patches tip " \
-               "&& hg qpush -a"
+    expected =
+      "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& hg qpop -a " \
+      "&& hg pull http://repo/project " \
+      "&& hg pull -R .hg/patches http://repo/project-patched " \
+      "&& hg update default " \
+      "&& hg update -R .hg/patches tip " \
+      "&& hg qpush -a"
 
     assert_equal expected, cmd
   end
@@ -76,14 +78,15 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
     # only need to test #checkout
     cmd = @scm.checkout 'default', '/path/to/scm'
 
-    expected = "if [ ! -d .hg ]; then hg init; fi " \
-               "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
-               "&& hg qpop -a " \
-               "&& hg pull http://repo/project " \
-               "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
-               "&& hg update default " \
-               "&& hg update -R .hg/patches deadbeefd00d " \
-               "&& hg qpush -a"
+    expected =
+      "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& hg qpop -a " \
+      "&& hg pull http://repo/project " \
+      "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
+      "&& hg update default " \
+      "&& hg update -R .hg/patches deadbeefd00d " \
+      "&& hg qpush -a"
 
     assert_equal expected, cmd
   end

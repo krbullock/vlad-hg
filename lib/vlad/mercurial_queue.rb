@@ -3,13 +3,12 @@ require 'vlad'
 module Vlad
   class MercurialQueue
 
-    set :source, Vlad::MercurialQueue.new
-    set :hg_cmd, 'hg'
-    set :revision, 'default'
-    set :queue_repo do
-      "#{repository}/.hg/patches"
-    end
-    set :queue_revision, 'default'
+    set :source,                Vlad::MercurialQueue.new
+    set :hg_cmd,                'hg'
+    set :revision,              'default'
+    set :hg_subrepos,           false
+    set(:queue_repo)            { "#{repository}/.hg/patches" }
+    set :queue_revision,        'default'
 
     ##
     # Returns the command that will check out +revision+ from the
@@ -18,7 +17,8 @@ module Vlad
 
     def checkout(revision, destination)
       commands = []
-      commands << "if [ ! -d .hg ]; then #{hg_cmd} init; fi"
+      commands <<
+        "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi"
       commands << "if [ ! -d .hg/patches/.hg ]; then #{hg_cmd} qinit -c; fi"
       commands << "#{hg_cmd} qpop -a"
       commands << "#{hg_cmd} pull #{repository}"
