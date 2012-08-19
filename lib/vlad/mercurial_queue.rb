@@ -21,12 +21,12 @@ module Vlad
         "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi"
       commands << "if [ ! -d .hg/patches/.hg ]; then " +
         "#{hg_cmd} clone -r null #{queue_repo} .hg/patches; fi"
-      commands << "#{hg_cmd} qpop -a"
+      commands << "#{hg_cmd} --config extensions.mq= qpop -a"
       commands << "#{hg_cmd} pull #{repository}"
       commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
       commands << "#{hg_cmd} update #{revision}"
       commands << "#{hg_cmd} update -R .hg/patches #{queue_revision}"
-      commands << "#{hg_cmd} qpush -a"
+      commands << "#{hg_cmd} --config extensions.mq= qpush -a"
       commands.join(' && ')
     end
 
@@ -38,9 +38,9 @@ module Vlad
     def export(revision, destination)
       case deploy_via.to_sym
       when :checkout, :clone
-        "#{hg_cmd} clone #{scm_path} -r qtip #{destination}"
+        "#{hg_cmd} --config extensions.mq= clone #{scm_path} -r qtip #{destination}"
       else # :archive, :export (or whatever)
-        "#{hg_cmd} archive#{' -S' if hg_subrepos} -r qtip #{destination}"
+        "#{hg_cmd} --config extensions.mq= archive#{' -S' if hg_subrepos} -r qtip #{destination}"
       end
     end
 

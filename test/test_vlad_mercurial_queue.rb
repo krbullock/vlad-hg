@@ -20,31 +20,31 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
       "&& if [ ! -d .hg/patches/.hg ]; then " \
       "hg clone -r null http://repo/project/.hg/patches .hg/patches; fi " \
-      "&& hg qpop -a " \
+      "&& hg --config extensions.mq= qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
       "&& hg update default " \
       "&& hg update -R .hg/patches tip " \
-      "&& hg qpush -a"
+      "&& hg --config extensions.mq= qpush -a"
 
     assert_equal expected, cmd
   end
 
   def test_export
     cmd = @scm.export 'default', '/path/to/release'
-    assert_equal 'hg archive -r qtip /path/to/release', cmd
+    assert_equal 'hg --config extensions.mq= archive -r qtip /path/to/release', cmd
   end
 
   def test_export_via
     set :deploy_via, :checkout
     cmd = @scm.export 'default', '/path/to/release'
-    assert_equal 'hg clone /path/to/scm -r qtip /path/to/release', cmd
+    assert_equal 'hg --config extensions.mq= clone /path/to/scm -r qtip /path/to/release', cmd
   end
 
   def test_export_subrepos
     set :hg_subrepos, true
     cmd = @scm.export 'default', '/path/to/release'
-    assert_equal 'hg archive -S -r qtip /path/to/release', cmd
+    assert_equal 'hg --config extensions.mq= archive -S -r qtip /path/to/release', cmd
     set :hg_subrepos, false
   end
 
@@ -64,12 +64,12 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
       "&& if [ ! -d .hg/patches/.hg ]; then " \
       "hg clone -r null http://repo/project-patched .hg/patches; fi " \
-      "&& hg qpop -a " \
+      "&& hg --config extensions.mq= qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project-patched " \
       "&& hg update default " \
       "&& hg update -R .hg/patches tip " \
-      "&& hg qpush -a"
+      "&& hg --config extensions.mq= qpush -a"
 
     assert_equal expected, cmd
   end
@@ -84,12 +84,12 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
       "&& if [ ! -d .hg/patches/.hg ]; then " \
       "hg clone -r null http://repo/project/.hg/patches .hg/patches; fi " \
-      "&& hg qpop -a " \
+      "&& hg --config extensions.mq= qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
       "&& hg update default " \
       "&& hg update -R .hg/patches deadbeefd00d " \
-      "&& hg qpush -a"
+      "&& hg --config extensions.mq= qpush -a"
 
     assert_equal expected, cmd
   end
