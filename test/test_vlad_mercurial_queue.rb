@@ -18,7 +18,8 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected =
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
-      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then " \
+      "hg clone -r null http://repo/project/.hg/patches .hg/patches; fi " \
       "&& hg qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \
@@ -61,7 +62,8 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected =
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
-      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then " \
+      "hg clone -r null http://repo/project-patched .hg/patches; fi " \
       "&& hg qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project-patched " \
@@ -80,7 +82,8 @@ class TestVladMercurialQueue < MiniTest::Unit::TestCase
 
     expected =
       "if [ ! -d .hg ]; then hg clone -r null http://repo/project .; fi " \
-      "&& if [ ! -d .hg/patches/.hg ]; then hg qinit -c; fi " \
+      "&& if [ ! -d .hg/patches/.hg ]; then " \
+      "hg clone -r null http://repo/project/.hg/patches .hg/patches; fi " \
       "&& hg qpop -a " \
       "&& hg pull http://repo/project " \
       "&& hg pull -R .hg/patches http://repo/project/.hg/patches " \

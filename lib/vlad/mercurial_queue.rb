@@ -19,7 +19,8 @@ module Vlad
       commands = []
       commands <<
         "if [ ! -d .hg ]; then #{hg_cmd} clone -r null #{repository} .; fi"
-      commands << "if [ ! -d .hg/patches/.hg ]; then #{hg_cmd} qinit -c; fi"
+      commands << "if [ ! -d .hg/patches/.hg ]; then " +
+        "#{hg_cmd} clone -r null #{queue_repo} .hg/patches; fi"
       commands << "#{hg_cmd} qpop -a"
       commands << "#{hg_cmd} pull #{repository}"
       commands << "#{hg_cmd} pull -R .hg/patches #{queue_repo}"
