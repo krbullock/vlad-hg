@@ -1,3 +1,13 @@
+=== 2.2.4 / 2012-08-18
+
+* 2 bug fixes
+
+  * Clone patch queue separately when cloning a repository with a patch
+    queue; <code>hg qclone</code> doesn't have a +--revision+ option.
+    This still gets the default path set correctly (fixed in 2.2.3).
+
+  * Explicitly enable MQ on the command line when using a patch queue.
+
 === 2.2.3 / 2011-09-29
 
 * 2 bug fixes
